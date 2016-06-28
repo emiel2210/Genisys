@@ -2196,7 +2196,7 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 								$remainingCached = $i->getCount() - $amountPlaced;
 								if($newItem->getCount() > $i->getCount() or $remainingCached < 0){
 									//There has to be a better way of doing this than kicking the player...
-									$this->kick("You attempted to place more of an item than you have.");
+									//$this->kick("You attempted to place more of an item than you have.");
 									return;
 								}
 								if($remainingCached){
@@ -2237,8 +2237,8 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 					if($i->deepEquals($newItem)){
 						$remainingCached = $i->getCount() - $newItem->getCount();
 
-						if(!$i->getCount() >= $newItem->getCount() || $remainingCached < 0){
-							$this->kick("You attempted to place more of an item than you have.");
+						if(!$i->getCount() >= $newItem->getCount() or $remainingCached < 0){
+							//$this->kick("You attempted to place more of an item than you have.");
 							return;
 						}
 						
@@ -2264,7 +2264,7 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 						$remainingCached = $i->getCount() - $newItem->getCount();
 
 						if(!$i->getCount() >= $newItem->getCount() or $remainingCached < 0){
-							$this->kick("You attempted to place more of an item than you have.");
+							//$this->kick("You attempted to place more of an item than you have.");
 							return;
 						}
 
@@ -2286,7 +2286,7 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 						$this->inventory->setItem($slot, $newItem);
 						return;
 					}
-					$this->kick("You attempted to swap for an item that you don't have.");
+					//$this->kick("You attempted to swap for an item that you don't have.");
 					return;
 				}
 
