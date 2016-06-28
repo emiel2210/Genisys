@@ -40,6 +40,9 @@ class SimpleTransactionGroup implements TransactionGroup{
 
 	/** @var Transaction[] */
 	protected $transactions = [];
+	
+	/** @var bool */
+	protected $desktopGui = false;
 
 	/**
 	 * @param Player $source
@@ -126,6 +129,18 @@ class SimpleTransactionGroup implements TransactionGroup{
 		return true;
 	}
 
+	public function isDesktopGui($transaction){
+		if(count($this->transactions) > 1){
+			return false;
+		}
+		if(count($this->source->getCachedItems()) === 0 and (($transaction->getTargetItem()->getId() !== 0 and $transaction->getSourceItem()->getId() === 0) or ($transaction->getTargetItem()->getCount() > $transaction->getSourceItem()->getCount()))){
+			$this->desktopGui = false;
+			return false;
+		}
+		$this->desktopGui = true;
+		return true;
+	}
+	
 	public function canExecute(){
 		$haveItems = [];
 		$needItems = [];
@@ -134,7 +149,7 @@ class SimpleTransactionGroup implements TransactionGroup{
 	}
 
 	public function execute(){
-		if($this->hasExecuted() or !$this->canExecute()){
+		if($this->hasExecuted() or (!$this->canExecute() and !$this->desktopGui)){
 			return false;
 		}
 
@@ -151,7 +166,11 @@ class SimpleTransactionGroup implements TransactionGroup{
 		}
 
 		foreach($this->transactions as $transaction){
-			$transaction->getInventory()->setItem($transaction->getSlot(), $transaction->getTargetItem());
+			if ($this->desktopGui){
+				$this->source->processContainerChange($transaction->getInventory(), $transaction->getSlot(), $transaction->getTargetItem(), $transaction->getSourceItem());
+			}else{
+				$transaction->getInventory()->setItem($transaction->getSlot(), $transaction->getTargetItem());
+			}
 		}
 
 		$this->hasExecuted = true;

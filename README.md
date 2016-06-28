@@ -47,6 +47,8 @@ For other platform, see below.
 * Base weather system was written by **@Zzm317** and rewritten by **@PeratX**
 * **@FENGberd**'s encouragement
 * Our leaders are **@ishitatsuyuki** and **@jasonczc**
+* The hotbar and the infamous memory leak were fixed by **@dktapps**
+* Windows 10 Edition fixes were adapted from a gist by **@extremeheat** (the sources can be found [here](https://gist.github.com/extremeheat/f1e9e0b8ca884727e6a3abfc7bfdc5a3))
 
 ### License
 Most of the code in this repository was written by the PocketMine team and is licensed under GPLv3. Some AI is proprietary, copying is prohibited.
