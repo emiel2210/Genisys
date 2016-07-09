@@ -4445,12 +4445,12 @@ class Player extends Human implements CommandSender, InventoryHolder, ChunkLoade
 			$pk->encode();
 			$batch = new BatchPacket();
 			$batch->payload = zlib_encode(Binary::writeInt(strlen($pk->getBuffer())) . $pk->getBuffer(), ZLIB_ENCODING_DEFLATE, Server::getInstance()->networkCompressionLevel);
-			$batch->encode();
-			$batch->isEncoded = true;
-			return $batch;
-		}
-		return $pk;
-	}
+			//$batch->encode();
+			//$batch->isEncoded = true;
+			//return $batch;
+		//}
+		//return $pk;
+	//}
 
 
 }
